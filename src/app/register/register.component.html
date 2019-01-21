@@ -1,0 +1,61 @@
+<mat-card class="example-card">
+    <div class="global_container">
+        <mat-card-header class="flex-center">
+            <mat-card-title>Rejestracja</mat-card-title>
+        </mat-card-header>
+        <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Imie" [(ngModel)]="name" name="name" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Nazwisko" [(ngModel)]="surname" name="surname" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Email" [(ngModel)]="email" type="email" name="email" required>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div ngModelGroup="passwords" #passwords="ngModelGroup" appCheckPassword>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="password" id="exampleInputPassword1" placeholder="Hasło"
+                                       #passwordA="ngModel" name="passwordA"
+                                       required id="passwordA" [(ngModel)]="password1">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6 form-group mt-1">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="password" id="exampleInputPassword2" placeholder="Powtórz hasło"
+                                       #passwordB="ngModel" name="passwordB"
+                                       required id="passwordB" [(ngModel)]="password2">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                <div *ngIf="passwords.errors?.passwordCheck && (passwordB.dirty || passwordB.touched)"
+                     class="alert alert-danger">
+                    Hasła nie są jednakowe
+                </div>
+            </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="row">
+                    <div class="col-6 flex-center">
+                        <button mat-raised-button type="button" color="primary" routerLink="/">Anuluj</button>
+                    </div>
+                    <div class="col-6 flex-center">
+                        <button mat-raised-button [disabled]="passwords.errors || !name || !surname || !email || !password2" type="submit" color="primary">Wyślij</button>
+                    </div>
+                </div>
+
+            </mat-card-actions>
+        </form>
+    </div>
+</mat-card>
