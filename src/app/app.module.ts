@@ -13,6 +13,11 @@ import { ListComponent } from './list/list.component';
 import {AppComponent} from "./app.component";
 import {CheckPasswordDirective} from "./register/check-password.directive";
 import {ColorPickerModule} from "ngx-color-picker";
+import {globalService} from "./globalService.service";
+import {AuthenticationService} from "./auth.service";
+import {HttpErrorHandler} from "./http-error-handler.service";
+import {MessageService} from "./message.service";
+import {AuthGuard} from "./auth-guard.service";
 
 
 @NgModule({
@@ -39,7 +44,12 @@ import {ColorPickerModule} from "ngx-color-picker";
     HttpClientModule,
     ColorPickerModule
   ],
-  providers: [],
+  providers: [
+      HttpErrorHandler,
+      MessageService,
+      AuthenticationService,
+      AuthGuard,
+      globalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

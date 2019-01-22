@@ -1,37 +1,40 @@
-import { NgModule } from '@angular/core';
-import { ExtraOptions, Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {ExtraOptions, Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {AddLineComponent} from "./add-line/add-line.component";
 import {ListComponent} from "./list/list.component";
+import {AuthGuard} from "./auth-guard.service";
 
 const routes: Routes = [
     {
-      path: '',
-      component: ListComponent,
+        path: '',
+        component: ListComponent,
     },
     {
-      path: 'login',
-      component: LoginComponent,
+        path: 'login',
+        component: LoginComponent,
     },
     {
-      path: 'register',
-      component: RegisterComponent,
+        path: 'register',
+        component: RegisterComponent,
     },
     {
-      path: 'addLine',
-      component: AddLineComponent,
+        path: 'addLine',
+        canActivate: [AuthGuard],
+        component: AddLineComponent,
     },
-  { path: '', redirectTo: '', pathMatch: 'full' },
-  { path: '**', redirectTo: '' },
+    {path: '', redirectTo: '', pathMatch: 'full'},
+    {path: '**', redirectTo: ''},
 ];
 
 const config: ExtraOptions = {
-  useHash: true,
+    useHash: true,
 };
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, config)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes, config)],
+    exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

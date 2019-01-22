@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map'
 import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthenticationService {
 
   private loginWrapper;
-  public token: string;
+  public token: string = '';
   loggedIn = false;
 
   constructor(
     public router: Router,
   ) {
     let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-    console.log(currentUser);
     if (currentUser !== undefined && currentUser !== null) {
-      this.token = currentUser.access_token;
+      this.token = currentUser.token;
       this.login();
     }else {
       this.logout();
@@ -29,16 +27,27 @@ export class AuthenticationService {
     let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     console.log(currentUser);
     if (currentUser !== undefined && currentUser !== null) {
-      this.token = currentUser.access_token;
+      this.token = currentUser.token;
       this.login();
     }else {
       this.logout();
     }
   }
 
+  checkLogin () {
+      let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+      if (currentUser !== undefined && currentUser !== null) {
+          this.token = currentUser.token;
+          this.login();
+      }else {
+          this.logout();
+      }
+      return this.loggedIn;
+  }
+
   login () {
     this.loggedIn = true;
-    this.router.navigate(['/dashboard'])
+    this.router.navigate(['/addLine'])
   }
 
   logout () {

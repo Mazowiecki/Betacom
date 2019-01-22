@@ -10,7 +10,7 @@
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
         <a mat-list-item routerLink=".">Lista tras</a>
-        <a mat-list-item routerLink="addLine">Dodaj trasę</a>
+        <a mat-list-item (click)="checkIfLogin()">Dodaj trasę</a>
         <a mat-list-item routerLink="register">Rejestracja</a>
         <a mat-list-item routerLink="login">Logowanie</a>
       </mat-nav-list>

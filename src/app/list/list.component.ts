@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {globalService} from "../globalService.service";
 
 @Component({
   selector: 'app-list',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+    routes: any;
+
+  constructor(
+      private globalService: globalService,
+  ) { }
 
   ngOnInit() {
+
+      let promiseGetRoutes = new Promise(resolve => {
+          this.globalService.getRoutes()
+              .subscribe(value => {resolve(value)});
+      });
+      promiseGetRoutes.then(response => {
+          this.routes = response;
+      });
+
+
   }
 
 }

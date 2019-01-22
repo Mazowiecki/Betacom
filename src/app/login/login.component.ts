@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {NgForm} from "@angular/forms";
+import {globalService} from "../globalService.service";
+import {AuthenticationService} from "../auth.service";
 
 @Component({
   selector: 'app-login',
@@ -15,17 +17,22 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private globalService: globalService,
+    private AuthenticationService: AuthenticationService,
   ) { }
 
   logIn(form: NgForm) {
-    console.log(form.value);
-    if(this.email == 'admin' && this.password == 'admin') {
-      this.router.navigate(["addLine"]);
-    }else {
-      alert("Invalid credentials");
-    }
 
+      this.onSubmit({
+          email: form.value.email,
+          password: form.value.password
+      });
   }
+
+    onSubmit(dataToSend) {
+        this.globalService.login(dataToSend)
+            .subscribe(response => this.AuthenticationService.saveToken(response));
+    }
 
   ngOnInit() {
   }
