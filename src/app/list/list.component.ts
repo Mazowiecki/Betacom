@@ -1,30 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {globalService} from "../globalService.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.sass']
+    selector: 'app-list',
+    templateUrl: './list.component.html',
+    styleUrls: ['./list.component.sass']
 })
 export class ListComponent implements OnInit {
 
     routes: any;
+    searchRouteNumber;
 
-  constructor(
-      private globalService: globalService,
-  ) { }
+    constructor(
+        private globalService: globalService,
+    ) {
+    }
 
-  ngOnInit() {
+    addLine(form: NgForm) {
+        this.searchRoute(form.value.searchRouteNumber);
+    }
 
-      let promiseGetRoutes = new Promise(resolve => {
-          this.globalService.getRoutes()
-              .subscribe(value => {resolve(value)});
-      });
-      promiseGetRoutes.then(response => {
-          this.routes = response;
-      });
+    searchRoute(number) {
+        let promiseGetRoutes = new Promise(resolve => {
+            this.globalService.searchRoutes(number)
+                .subscribe(value => {
+                    resolve(value)
+                });
+        });
+        promiseGetRoutes.then(response => {
+            this.routes = response;
+        });
+    }
 
+    showAll() {
+        let promiseGetRoutes = new Promise(resolve => {
+            this.globalService.getRoutes()
+                .subscribe(value => {
+                    resolve(value)
+                });
+        });
+        promiseGetRoutes.then(response => {
+            this.routes = response;
+        });
+    }
 
-  }
+    ngOnInit() {
+        this.showAll();
+
+    }
 
 }

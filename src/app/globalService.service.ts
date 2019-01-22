@@ -70,6 +70,10 @@ export class globalService {
         return this.get( '/tracks' );
     }
 
+    searchRoutes(number) {
+        return this.get( '/track/number/' + number );
+    }
+
     login(data) {
         return this.post( '/authenticate', data );
     }
