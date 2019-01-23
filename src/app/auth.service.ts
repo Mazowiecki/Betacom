@@ -7,6 +7,7 @@ export class AuthenticationService {
   private loginWrapper;
   public token: string = '';
   loggedIn = false;
+  loginError: any;
 
   constructor(
     public router: Router,
@@ -23,14 +24,19 @@ export class AuthenticationService {
 
 
   public saveToken (data: any) {
-    sessionStorage.setItem('currentUser', JSON.stringify(data));
-    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-    console.log(currentUser);
-    if (currentUser !== undefined && currentUser !== null) {
-      this.token = currentUser.token;
-      this.login();
-    }else {
-      this.logout();
+    if (data.token) {
+        this.loginError = null;
+        sessionStorage.setItem('currentUser', JSON.stringify(data));
+        let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        // console.log(currentUser);
+        if (currentUser !== undefined && currentUser !== null) {
+            this.token = currentUser.token;
+            this.login();
+        }else {
+            this.logout();
+        }
+    } else {
+        this.loginError = data;
     }
   }
 
@@ -51,6 +57,8 @@ export class AuthenticationService {
   }
 
   logout () {
+    sessionStorage.removeItem('currentUser');
+    this.router.navigate(['/login'])
     this.token = '';
     this.loggedIn = false;
   }

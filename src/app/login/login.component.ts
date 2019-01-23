@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {NgForm} from "@angular/forms";
 import {globalService} from "../globalService.service";
 import {AuthenticationService} from "../auth.service";
+import {MessageService} from "../message.service";
 
 @Component({
   selector: 'app-login',
@@ -18,10 +19,17 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private globalService: globalService,
-    private AuthenticationService: AuthenticationService,
+    public AuthenticationService: AuthenticationService,
+    public MessageService: MessageService,
   ) { }
 
-  logIn(form: NgForm) {
+    loginErrorsTranslation: any = {
+        'Authentication failed. Wrong password.': 'Błędne hasło',
+        'Authentication failed.': 'Błędny email lub hasło'
+    };
+
+
+    logIn(form: NgForm) {
 
       this.onSubmit({
           email: form.value.email,

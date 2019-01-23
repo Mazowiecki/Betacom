@@ -33,4 +33,8 @@ export class AppComponent implements OnDestroy {
         }
     }
 
+    logOut() {
+        this.AuthenticationService.logout();
+    }
+
 }

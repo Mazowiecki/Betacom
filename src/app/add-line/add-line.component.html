@@ -47,5 +47,9 @@
 
             </mat-card-actions>
         </form>
+        <div *ngIf="MessageService.messages.length > 0"
+             class="alert alert-danger">
+            Wystąpił błąd
+        </div>
     </div>
 </mat-card>

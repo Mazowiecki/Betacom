@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {globalService} from "../globalService.service";
+import {MessageService} from "../message.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-add-line',
@@ -16,6 +18,8 @@ export class AddLineComponent implements OnInit {
 
     constructor(
         private globalService: globalService,
+        public MessageService: MessageService,
+        private router: Router
     ) {
     }
 
@@ -29,10 +33,26 @@ export class AddLineComponent implements OnInit {
         form.reset();
     }
 
+
+
+
     onSubmit(dataToSend) {
         this.globalService.postRoute(dataToSend)
-            .subscribe(response => response);
+            .subscribe (
+                () => {
+                   if (this.MessageService.messages.length > 0) {
+
+                   } else {
+                       this.router.navigate(['/'])
+                   }
+                }
+            );
     }
+
+
+
+
+
 
     ngOnInit() {
     }

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {globalService} from "../globalService.service";
 import {NgForm} from "@angular/forms";
+import {catchError} from "rxjs/operators";
+import {MessageService} from "../message.service";
 
 @Component({
     selector: 'app-list',
@@ -14,6 +16,7 @@ export class ListComponent implements OnInit {
 
     constructor(
         private globalService: globalService,
+        private MessageService: MessageService
     ) {
     }
 

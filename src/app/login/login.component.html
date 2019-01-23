@@ -23,17 +23,16 @@
                     </div>
                 </div>
 
-                <mat-spinner *ngIf="showSpinner"></mat-spinner>
             </mat-card-content>
             <mat-card-actions>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-12 col-sm-4 flex-center">
-                            <button mat-raised-button type="button" color="primary" routerLink="/">Anuluj</button>
-                        </div>
                         <div class="col-12 col-sm-3 flex-center">
                             <button mat-raised-button [disabled]="!email || !password" type="submit" color="primary">Zaloguj
                             </button>
+                        </div>
+                        <div class="col-12 col-sm-4 flex-center">
+                            <button mat-raised-button type="button" color="primary" routerLink="/">Anuluj</button>
                         </div>
                         <div class="col-12 col-sm-5 flex-center">
                             <button mat-raised-button type="button" color="primary" routerLink="/register">Zajerestruj się</button>
@@ -43,5 +42,9 @@
 
             </mat-card-actions>
         </form>
+        <div *ngIf="AuthenticationService.loginError"
+             class="alert alert-danger">
+             {{ AuthenticationService.loginError.message | i18nSelect:loginErrorsTranslation }}
+        </div>
     </div>
 </mat-card>
