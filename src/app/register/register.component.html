@@ -45,6 +45,10 @@
                 </div>
             </div>
             </mat-card-content>
+            <div *ngIf="registerError"
+                 class="alert alert-danger">
+                {{ registerError | i18nSelect:registerErrorsTranslation }}
+            </div>
             <mat-card-actions>
                 <div class="row">
                     <div class="col-6 flex-center">

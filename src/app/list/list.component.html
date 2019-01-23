@@ -24,19 +24,19 @@
             </div>
 
             <div class="container-fluid">
-                <mat-card>
+                <mat-card class="cardResponsive">
                     <mat-card-content>
-                        <div class="row">
-                            <div class="col-sm-2">
+                        <div class="row listResponsive">
+                            <div class="col-2">
                                 <p>Numer:</p>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-3">
                                 <p>Tytuł:</p>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-4">
                                 <p>Punkty pośrednie:</p>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-3">
                                 <p>Kolor:</p>
                             </div>
                         </div>
@@ -46,19 +46,19 @@
 
             <div class="container-fluid">
                 <div *ngFor="let route of routes; index as i;">
-                    <mat-card>
+                    <mat-card class="cardResponsive">
                         <mat-card-content>
-                            <div class="row">
-                                <div class="col-sm-2">
+                            <div class="row listResponsive">
+                                <div class="col-2">
                                     <p>{{ route.number }}</p>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-3">
                                     <p>{{ route.title }}</p>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-4">
                                     <p>{{ route.viaPoints }}</p>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-3">
                                     <p>{{ route.trackColor }}</p>
                                 </div>
                             </div>
